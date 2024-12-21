@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include("../partials/head")%>
+
+<body>
+    <%- include("../partials/header") %>
+    <main style="margin-top: 88px;">        
+      <table class="table" style="margin-top: 88px;">
+        <tbody>
+        <tr class="table-active">
+            <th>categoria</th>
+            <th>ID</th>
+            <th >nome</th>
+            <th >descricao</th>
+            <th >valor</th>
+            <th >acos</th>
+            <th>favorito</th>
+        </tr>
+          
+            <% calca.forEach(function (calcas){ %>
+          
+            <tr>
+              <td><%= calcas.categoria_id %> </td>
+              <td><%= calcas.id  %> </td>
+              <td><%= calcas.nome  %>  </td>
+              <td><%= calcas.descricao  %></td>
+              <td><%= calcas.valor  %></td>
+               
+              <td>
+                <a href="/superadmin/produtos/<%= calcas.id %>/edit">Editar</a>
+                <a href="/superadmin/produtos/<%= calcas.id %>/remover">Remover</a>
+                <a href="/superadmin/produtos/<%= calcas.id %>">Ver produto</a>
+
+               
+                <td><a onclick="showMessage()" class='favorito' href="/superadmin/favoritar/<%= calcas.id %>"style="text-decoration: none;">⭐</a></td>
+              
+              <% }) %> 
+              
+              </td>
+            </tr>
+          </div>
+      
+        </tbody>
+      </table> 
+        
+      </section>
+ 
+  <a href="/superadmin/produtos/criar">Novo produto</a>
+  <a href="/superadmin/categorias/criar">Nova categoria</a>
+  <a href="/superadmin/promo">Ver itens em favoritos</a>
+
+      
+  
+</main>
+    <%- include("../partials/footer") %>
+</body>
+<script>
+  function showMessage(){
+    alert('item a dicionado aos favoritos/promo')
+  }
+
+</script>
+</html>

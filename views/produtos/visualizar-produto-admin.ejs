@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/head")%>
+
+<body>
+    <%- include("../partials/header") %>
+    <main class="container-fluid " style="margin-top: 42px;">
+        <section class="container-fluid d-flex flex-column flex-sm-row">
+            
+            
+                <div class="container d-flex flex-column align-items-center" style="background-color: rgb(250, 244, 244); height: 700px;">
+                    <img  style="height: 500px" class="img-fluid w-75 p-3  " src="/uploads/<%= produto.imagem %>" alt="">
+                    <div class="container d-flex justify-content-between w-50 p-3 " style="margin-left:12px;Height: 130px">
+                        <img    style="  margin:5px;width:80px;margin-right:20px;margin-left:20px;Height: 120px" src="/uploads/<%= produto.imagem %>" alt="">
+                        <img    style="  margin:5px; margin-right:20px;width:80px;Height: 120px" src="/uploads/<%= produto.imagem %>" alt="">
+                        <img  style="  margin:5px;width:80px;margin-right:20px;Height: 120px" src="/uploads/<%= produto.imagem %>" alt="">
+                        <img  style="  margin:5px;width:80px;margin-right:20px;Height: 120px" src="/uploads/<%= produto.imagem %>" alt="">
+                    </div>
+                    
+                </div>
+                <div class="container-fluid d-flex flex-column align-middle" style="background-color: rgb(235, 100, 100); margin-top: 20px;">
+                    <div class="container-fluid d-flex flex-column"  style="background-color: rgb(34, 83, 19); Height: 405px"  >
+                        <h1><%= produto.nome %> </h1>
+                        <p>vendido por: </p>
+                    </div>
+                    <div class="container-fluid" style="background-color: rgb(250, 246, 19); Height: 95px">
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+<script src="/js/apiCepProduto.js"></script>
+</html>

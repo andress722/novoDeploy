@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include("./partials/head")%>
+  <body>
+</head>
+
+<body>
+    <%- include("./partials/header") %>
+    <main class="bg-light " >
+        <section class="container-fluid d-flex justify-content-evenly flex-wrap bg-light" style="width: 100%;">
+            
+            
+                <div class="d-flex flex-column align-items-center bg-light " style=" margin-top: 30px;   width: 221px;
+                margin-left: -13px; ">
+                    <img class="thumb-visual-principal"  src="/uploads/<%= produtos.imagem %>" alt="">
+                    <div class="d-flex justify-content-between" style=" width: 200px; margin-left: -8px;
+                    Height: 130px;
+                    width: 237px;
+                    padding: 0px;">
+                        <img class="thumb-visual"   src="/uploads/<%= produtos.imagem %>" alt="">
+                        <img class="thumb-visual"  src="/uploads/<%= produtos.imagem %>" alt="">
+                        <img class="thumb-visual"  src="/uploads/<%= produtos.imagem %>" alt="">
+                        
+                    </div>
+                    
+                </div>
+                <div class=" d-flex flex-column align-middle bg-light" style="width: 184px; margin-top: 20px;">
+                    <div class=" d-flex flex-column bg-light" >
+                        <h1><%= produtos.nome %> </h1>
+                        <p>vendido por: </p>
+                        <div >
+                            <div class="box-valor font-weight-bold">
+                                <span style="font-size: 14px; color: #29B6F6">R$</span>
+                                <span style="font-size: 30px; color: #1565C0;"><%= produtos.valor %> </span>
+                            </div>
+                            <div class='box-promo'>
+                                <span  style="color:#29B6F6; font-size: 20px; ">Promoção</span>
+                                <span>descrição da Promoção</span>
+                            </div>
+                           
+                        </div>
+                        <span style="font-size: 16px; margin-top: 18px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio, vero officia? Quis quidem, explicabo non natus, architecto aliquam id qui.</span>
+                        <div class="border-radius: 12px; d-flex flex-column-reverse" style="margin-left: -10px; margin-top: 10px; Height: 95px">
+                            <button id="btn-product" class="btn btn-primary" onclick="addProduto('<%= produtos.nome %>', document.getElementById('qtd').value, '<%= produtos.valor %>','<%= produtos.id %>')">Adicionar ao Carrinho</button>
+                            <div >
+                                <button id="btn-qtd" class="border d-flex flex-column"> 
+                                    QTD: 
+                                 <input  class="bg-light" type="number" value="1" min="1" max="10" id="qtd">
+                                </button>
+                            
+                            </div>  
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </section>
+        
+    </main>
+   
+    <br>
+    <%- include("./partials/footer") %>
+    
+</body>
+<script src="/js/apiCepProduto.js"></script>
+<script src="/js/carrinho.js"></script>
+<script>
+    let qtd = document.getElementById('btn-qtd')
+    function passou(){
+        console.log('passou')
+    }
+    qtd.addEventListener('mouseenter',passou )
+
+</script>
+<script src="/js/adi.js"></script>
+</html>

@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+        <%- include("./partials/head")%>
+<body>
+    
+</body>
+
+<body>
+    <%- include("./partials/header")%>
+<main style="height: 600px;">
+    <section style="margin-top: 150px; background-color: #eee; " class="h-100 gradient-form">
+        <form style=" margin-bottom: 25px; border: solid 2px;" class="container d-flex flex-column" action="/pass/send" method="post" onsubmit="validaCadastro(event)" novalidate>
+           
+            <div class="lista-erros"></div>
+
+            <label for="esqueci">Digite seu email para redefinir senha: </label>
+            <input style="border: solid 1px; width: 300px;" type="email" name='email'placeholder="email" id="  email" data-required >
+            <button class="btn btn-primary" style="width: 100px;margin-top: 15px" type="submit">Enviar</button>
+        </form>
+    </section>
+    </main>
+        <%- include("./partials/footer")%>
+</body>
+
+<script src="/js/validacao.js"></script>
+<script src="/js/verificarEmail.js"></script>
+</html>

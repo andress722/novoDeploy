@@ -1,0 +1,55 @@
+
+section.contato .container {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+section.contato h1 {
+    color: black;
+    font-size: 40px;
+    margin-bottom: 70px;
+}
+
+.contato form input:not([type="radio"]):not([type="checkbox"]),
+.contato form textarea,
+.contato form select {
+    width: 96%;
+    padding: 5px;
+}
+
+.contato form input:not([type="radio"]):not([type="checkbox"]):focus,
+.contato form textarea:focus,
+.contato form select:focus {
+    outline-color: #00796B;
+}
+
+.contato form fieldset {
+    margin: 15px 0;
+    border-color: #fff;
+}
+
+.contato form textarea {
+    resize: none;
+    height: 300px;
+}
+
+.contato form label {
+    margin: 10px 0 5px;
+    display: inline-block;
+}
+
+.contato .info {
+    padding: 15px 30px;
+}
+
+.contato .info iframe {
+    max-width: 100%;
+    width: 700px;
+    height: 300px;
+}
+
+section.contato a:any-link,
+section.contato p {
+    color: #575757;
+}
+

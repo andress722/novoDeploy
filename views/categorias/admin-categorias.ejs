@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include("../partials/head")%>
+
+<body>
+    <%- include("../partials/header") %>
+    <main>        
+
+
+      <table class="table" >
+        <tbody>
+        <tr class="table-active">
+            <th>ID</th>
+            <th >nome</th>
+            <th >açoes</th>
+        </tr>
+        
+            <% categorias.forEach(function(produto){ %> 
+            <tr>
+              <td><%= produto.id  %> </td>
+              <td><%= produto.nome  %>  </td>
+
+              <td>
+                <a href="/superadmin/categorias/<%= produto.id %>/edit">Editar</a>
+                <a href="/superadmin/categorias/<%= produto.id %>/remove">Remover</a>
+                <a href="/superadmin/categorias/<%= produto.id %>">ver categoria</a>
+              </td>
+            </tr>
+          </div>
+        <% }) %>
+        </tbody>
+      </table> 
+          
+      </section>
+ 
+  <a href="/superadmin/categorias/criar" >Nova categoria</a>
+</main>
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<html lang="en">
+    <%- include("../partials/head")%>
+<body>
+    <%- include("../partials/header") %>
+    <main style=" height: auto;" class="container-fluid bg-light" id="admin-main">
+       
+       
+       
+ 
+          
+        <section style="margin-top: 50px; justify-content: space-evenly; flex-wrap: wrap; margin-left: -5px;"
+            class="container d-flex ">
+            <div class="container bg-secondary" id="side">
+                <h2 style="width: 182px;
+                            text-align: center;
+                            font-size: 30px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;"><span style="font-size: 80px;" class="bi bi-person-circle"></span>
+                    <%= usuarioLogado.nome %>
+                </h2>
+        
+                <ul style="list-style: none; text-decoration: none; ">
+                    <li><strong><a href="/cadastro/edit/<%= usuario %> ">Editar meu perfil</a> </strong> </li>
+                    <li><strong><a href="/api/carrinho?page=0">Meus pedidos </a></strong> </li>
+        
+                </ul>
+        
+            </div>
+            </div>
+            
+            <div style="width: 300px; padding-top: 58px; text-align: center;" class="container d-flex flex-column align-items-center p-0">
+                    
+                        <h2>Meus pedidos</h2>
+                        <ul id="list" style="list-style: none; padding: 0px;">
+                            <% orders.filter(function(nPedido){ %> 
+                                <% if(nPedido.id_usuario == usuario){ %> 
+                                <div>
+                                  
+                                    <div style="width: 100px; align-items: center; margin-left: 65px;">
+                                        <% if(nPedido.status == 'refused'){ %> 
+                                            <img id="recusado" style="width: 30px; " src="/imagens/cor-vermelha.png" alt="">
+                                        <% }else if(nPedido.status== 'approved'){ %>
+                                             
+                                        <img id="aceito" style="width: 30px;" src="/imagens/cor-ver.png" alt=""> 
+                                        <% }else{ %> 
+                                        <img id="pendente" style="width: 30px;" src="/imagens/cor-laranja.png" alt="">
+                                        <% } %> 
+                                    </div>
+                                    <% if(nPedido.status){ %> 
+                                    <p style="text-align: center;">Status: <span id="statusId"> <%= nPedido.status %>   </span></p>
+                                        <% }else{ %>
+                                           <p>Status: <span id="statusId">Pendente</span></p> 
+                                        <% } %>  
+                                    <% if(nPedido.numero_pedido  ) {%> 
+                                            <p>Numero do pedido: <a href="/order/<%= nPedido.numero_pedido %>"><%= nPedido.numero_pedido %></a> </p>
+                                    <% } %> 
+                                   <% let total = [nPedido.valor] %>
+                                   <% let nTotal = total[0].split(",") %> 
+                                    <% let nTotalN = nTotal.map(Number).reduce((e,t)=> e+t) %> 
+                                    <li>Total: R$ <%= nTotalN %> </li>
+                                
+                             <% }}) %> 
+                           
+                        </ul>
+                        <nav style='margin-top: 10px;margin-bottom: 10px;' aria-label="Page navigation example">
+                            <ul class="pagination"><li class="page-item ">
+                               
+
+                                <% for(let i = 0; i<totalPages; i++){ %> 
+                              
+                              <li class="page-item"><a class="page-link" href="?page=<%= i %>"><%= i+1 %> </a></li>
+                            <%   }%> 
+                                <li class="page-item">
+                            
+                              </li>
+                            </ul>
+                          </nav>
+                          </nav>
+                </div>
+                
+            </div>
+            
+        </div >
+        
+        </section>
+        
+    </main>
+    
+   <%-  include('../partials/footer') %> 
+</body>
+
+<script>
+
+
+</script>
+</html>

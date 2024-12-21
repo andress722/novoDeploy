@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include("../partials/head")%>
+
+<body>
+    <%- include("../partials/header") %>
+    <main style="margin-top: 88px;">        
+      <table class="table" style="margin-top: 88px;">
+        <tbody>
+        <tr class="table-active">
+            <th>categoria</th>
+            <th>ID</th>
+            <th >nome</th>
+            <th >descricao</th>
+            <th >valor</th>
+            <th >acos</th>
+            <th>favorito</th>
+        </tr>
+          
+            <% favorito.forEach(function (favoritos){ %>
+          
+            <tr>
+              <td><%= favoritos.addfavo.categoria_id %> </td>
+              <td><%= favoritos.addfavo.id  %> </td>
+              <td><%= favoritos.addfavo.nome  %>  </td>
+              <td><%= favoritos.addfavo.descricao  %></td>
+              <td><%= favoritos.addfavo.valor  %></td>
+               
+              <td>
+                <a href="/superadmin/produtos/<%= favoritos.id %>/edit">Editar</a>
+                <a href="/superadmin/favorito/<%= favoritos.id %>/remover">Remover</a>
+                <a href="/produtos/<%= favoritos.id %>">Ver produto</a>
+
+               
+                <td><a onclick="()=> {alert('produto adicionado a promo/favorito')}" class='favorito' href="/superadmin/favoritar/<%= favoritos.id %>" style="text-decoration: none;">⭐</a></td>
+              
+              <% }) %> 
+              
+              </td>
+            </tr>
+          </div>
+      
+        </tbody>
+      </table> 
+        
+      </section>
+ 
+  <a href="/superadmin/produtos/criar">Novo produto</a>
+  <a href="/superadmin/categorias/criar">Nova categoria</a>
+
+      
+  
+</main>
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

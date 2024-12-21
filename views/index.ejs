@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head")%>
+
+  <body>
+
+
+
+    <%- include("./partials/header")%>
+    <%- include("./partials/banner")%>
+    
+
+
+  <main style="margin-top: 50px!important; background-color: #eee;" class="bg-light">
+    <section style="margin-top: 44px;">
+      <%- include("./partials/promocoes")%>
+      <section class="produtos" style="background-color: #eee;" >
+        
+        <div class="container-fluid w-100 p-0 bg-dark d-flex justify-content-center" style="height:100px; border-radius: 0px 0px 4px 4px;">
+          <div class="w-100 p-3">
+            
+            <ul class="ul-categorias">  
+              <% categoria.forEach(function(categorias){ %> 
+                <li >
+                  <div class="categoria-bar">
+                    <img style="width: 55px; border: solid #eee; border-radius: 41px;" 
+                         src="/uploads/<%= categorias.imagem %> " alt="">
+                    
+                        <p><%= categorias.nome %> </p>
+                  </div>
+                  
+                </li>
+              <% }) %> 
+            </ul>
+          </div>
+        </div>
+        <section class="container-fluid" style="margin-top: 44px;">
+          <h3 style="margin-left: 5%;"><span><img src="/img/offer_discount_sales_proc_icon_228008.svg" style="width: 70px;" alt=""></span>Produtos em
+            destaques</h3>
+          <hr>
+          
+          <div id="row" class="container-fluid  row">
+              <% produtos.forEach(function(element){ %>
+               <div id="itens-products">
+        
+        
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-img-actions">
+        
+                    <img id="img-card" src="/uploads/<%= element.imagem %> " class="card-img img-fluid" width="96" height="350"
+                      alt="">
+        
+                  </div>
+                </div>
+        
+                <div class="card-body text-capitalize bg-light text-center font-weight-bold text-danger" style="width: 358px; border-radius: 5px;">
+                  <div class="mb-2">
+                    <h6 class="font-weight-semibold mb-2">
+                      <a  href="/produtos/<%= element.id %> " class="text-default text-capitalize text-danger mb-2" data-abc="true">
+                        <%= element.nome %>
+                      </a>
+                    </h6>
+        
+                    <a href="/produtos/<%= element.id %>" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                  </div>
+        
+                  <div>
+                    QTD: <input style="text-align: center;" class="bg-light" type="number" value="1" min="1" max="10" id="qtd">
+        
+                    <h3 class="mb-0 font-weight-semibold">R$ <%= element.valor %>
+                    </h3>
+                  </div>
+        
+                  <div>
+                    <i class="fa fa-star star"></i>
+                    <i class="fa fa-star star"></i>
+                    <i class="fa fa-star star"></i>
+                    <i class="fa fa-star star"></i>
+                  </div>
+        
+                  <div class="text-muted mb-3">34 reviews</div>
+        
+                  <button id="btn-add-cart" type="button"
+                    onclick="addProduto('<%= element.nome %>', document.getElementById('qtd').value, '<%= element.valor %>','<%= element.id %>')"
+                    class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+        
+        
+                </div>
+        
+              </div>
+        
+        
+        
+        
+            </div>
+        
+            <% }) %>
+        
+        
+        </div>  
+        </div>
+        </section>
+
+
+      <section class="container-fluid" style="margin-top: 44px;">
+
+        <h3 style="margin-left: 5%;"><span><img src="/img/ecommerce_shopping_best_price_buy_icon_220363.svg" style="width: 70px; " alt=""></span> Mais vendidos</h3>
+      <hr>
+        <div class="container-fluid p-0 d-flex justify-content-center ">
+        
+          <div id="row" class="container-fluid  row">
+            <% produtos.forEach(function(element){ %>
+              <div id="itens-products">
+        
+        
+                <div class="card">
+                  <div class="card-body">
+                    <div class="card-img-actions">
+        
+                      <img id="img-card" src="/uploads/<%= element.imagem %> " class="card-img img-fluid" width="96"
+                        height="350" alt="">
+        
+                    </div>
+                  </div>
+        
+                  <div class="card-body bg-light text-center" style="width: 308px">
+                    <div class="mb-2">
+                      <h6 class="font-weight-semibold mb-2">
+                        <a href="/produtos/<%= element.id %> " class="text-default mb-2" data-abc="true">
+                          <%= element.nome %>
+                        </a>
+                      </h6>
+        
+                      <a href="/produtos/<%= element.id %>" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                    </div>
+        
+                    <div>
+                      QTD: <input style="text-align: center;" class="bg-light" type="number" value="1" min="1" max="10"
+                        id="qtd">
+        
+                      <h3 class="mb-0 font-weight-semibold">R$ <%= element.valor %>
+                      </h3>
+                    </div>
+        
+                    <div>
+                      <i class="fa fa-star star"></i>
+                      <i class="fa fa-star star"></i>
+                      <i class="fa fa-star star"></i>
+                      <i class="fa fa-star star"></i>
+                    </div>
+        
+                    <div class="text-muted mb-3">34 reviews</div>
+        
+                    <button id="btn-add-cart" type="button"
+                      onclick="addProduto('<%= element.nome %>', document.getElementById('qtd').value, '<%= element.valor %>','<%= element.id %>')"
+                      class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+        
+        
+                  </div>
+        
+                </div>
+        
+        
+        
+        
+              </div>
+        
+              <% }) %>
+        
+        
+          </div>
+        </div>
+      </section>
+
+  </main>
+    <%- include("./partials/whatsapp")%>
+  <%- include("./partials/footer")%>
+
+
+</body>
+
+
+
+</html>
+<script src="/js/carrinho.js"></script>

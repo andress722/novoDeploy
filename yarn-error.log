@@ -1,0 +1,67 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\andre\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Users\andre\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\andre\AppData\Local\Programs\Python\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\IDM Computer Solutions\UltraEdit;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Users\andre\AppData\Local\Microsoft\WindowsApps;;C:\Users\andre\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\andre\AppData\Roaming\npm
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  16.13.2
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Users\andre\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:137143:13)
+      at Interface.emit (node:events:390:28)
+      at Interface._ttyWrite (node:readline:1081:16)
+      at ReadStream.onkeypress (node:readline:288:10)
+      at ReadStream.emit (node:events:390:28)
+      at emitKeys (node:internal/readline/utils:358:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (node:internal/readline/emitKeypressEvents:61:36)
+      at ReadStream.emit (node:events:390:28)
+      at addChunk (node:internal/streams/readable:315:12)
+
+npm manifest: 
+  {
+    "name": "andresite",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "start": "node ./bin/www"
+    },
+    "dependencies": {
+      "axios": "^0.26.1",
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.19.2",
+      "bootstrap": "^3.4.1",
+      "bootstrap-icons": "^1.8.1",
+      "cookie-parser": "~1.4.4",
+      "debug": "~2.6.9",
+      "ejs": "~2.6.1",
+      "express": "~4.16.1",
+      "express-session": "^1.17.2",
+      "express-validator": "^6.14.0",
+      "http-errors": "~1.6.3",
+      "jquery": "^3.6.0",
+      "morgan": "~1.9.1",
+      "multer": "^1.4.4",
+      "mysql2": "^2.3.3",
+      "passport": "^0.6.0",
+      "passport-local": "^1.0.0",
+      "popper.js": "^1.16.1",
+      "sequelize": "^6.17.0",
+      "sequelize-cli": "^6.4.1",
+      "uuidv4": "^6.2.12"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

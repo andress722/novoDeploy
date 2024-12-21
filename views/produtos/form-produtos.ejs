@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/head")%>
+
+
+<body>
+    <%- include("../partials/header") %>
+        <section class="contato" style="margin-top: 128px ;">
+            <div class="container">
+                <h1>Cadastro de produtos</h1>
+
+                <div class="align-row">
+                    <form  class="formulario-principal" method="POST" enctype="multipart/form-data">
+
+                        <label for="imagem">Envie uma imagem</label>
+                        <input type="file" name="imagem">
+                        
+                        <label for="">Selecione uma categoria</lab  el>
+                        <select name="categoria_id" id="categoria_id">
+                            <% categorias.forEach(categoria => { %> 
+                            <option value="<%= categoria.id %>" ><%= categoria.nome %></option>
+                                <% }) %> 
+                        </select>
+
+                    
+                        <input type="hidden" id="usuario_id" placeholder="<%= usuario.nome  %> " name="usuario_id" value="<%= usuario.id %>" readonly=“true”>
+
+                        <label for="nome">nome</label>
+                        <input type="text" id="nome" name="nome" >
+
+                        <label for="descricao">descricao</label>
+                        <textarea name="descricao" id="descricao" ></textarea>
+
+                        <label for="valor">valor</label>
+                        <input type="number" id="valor" name="valor" >
+                        <hr style="width: 96%;">
+                        <hr>
+                        <button style="width: 100px;" type="submit" class="btn btn-primary">enviar</button>
+                    </form>
+                 
+                </div>
+            </div>
+        </section>
+    <hr>    
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

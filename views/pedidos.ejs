@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include("./partials/head")%>
+<body>
+    <%- include("./partials/header") %>
+    <main>        
+
+
+      <table class="table" >
+        <tbody>
+        <tr class="table-active">
+            <th>ID Pedido</th>
+            <th >Status</th>
+            <th >açoes</th>
+        </tr>
+        
+            <!-- <% pedidos.forEach(function(pedido){ %> 
+            <tr>
+              <td> ID <%= pedido.id_pedido %> </td>
+              <td>Status: <%= pedido.status %> </td>
+
+              <td>
+                <a href="/pedidos/<%= pedido.id_pedido %>">ver categoria</a>
+              </td>
+            </tr>
+          </div>
+        <% }) %> -->
+        </tbody>
+      </table> 
+          
+      </section>
+
+</main>
+    <%- include("./partials/footer") %>
+
+    
+</body>
+
+<script>
+
+const produtosLocal = JSON.parse(localStorage.getItem("produtos"))
+         produtos.map(items => {
+                            
+            if (items.produto === produto)
+            items.produto = items.produto
+            items.quantidade = parseInt(items.quantidade)
+            items.valor = parseInt(items.valor)
+            items.id = parseInt(items.id)
+            return items;
+})
+
+
+</script>
+
+
+</html>

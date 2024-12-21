@@ -1,0 +1,70 @@
+<html lang="en">
+    <%- include("../partials/head")%>
+    <style>a{
+        text-decoration: none;
+    }
+    </style>
+<body>
+    <%- include("../partials/header") %>
+    <main id="admin-main"  style="height: 700px;" class="container-fluid bg-light"  >
+        <section class="container d-flex flex-wrap justify-content-center ">
+            <div class="bg-secondary" id="side">
+                <h2 style="width: 182px;
+                                text-align: center;
+                                font-size: 30px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;"><span style="font-size: 80px;" class="bi bi-person-circle"></span>
+                    <%= usuarioLogado.nome %>
+                </h2>
+            
+                <ul style="list-style: none; text-decoration: none; ">
+                    <li><strong><a href="/cadastro/edit/<%= usuario %> ">Editar meu perfil</a> </strong> </li>
+                    <li><strong><a href="/api/carrinho?page=0">Meus pedidos </a></strong> </li>
+            
+                </ul>
+            
+            </div>
+            </div>
+        <div style="width: 70%;margin: 0px;" class="container d-flex flex-column text-align-center align-items-center p-0">
+               
+                    <h2 style="font-size: 40px;">Informações do pedido</h2>
+                    <% if(order.status === undefined || order.status == null ){ %>
+                        <h1>Status <span>Pendente</span></h1>
+                    <% }else{ %>
+                        <% if(order.status === 'approved'){ %> 
+                                <h1>Status: Aprovado <span style="font-size: 50px;" class="fa fa-check text-success"></span></h1>
+                        <% }else{ %> 
+                                <h1>Status <span><%= order.status %> </span></h1>
+                        <% }} %>  
+                    
+                    <ul style="list-style: none; padding: 0px;">
+                        
+                        <div class="d-flex flex-column">
+                            <li >Produtos: <%= order.produto %></li>
+                            
+                            <% var total = [order.total] %> 
+                            <% var totalS = total[0].split(",").map(Number).reduce((e,t)=> e+t) %> 
+                            <li>valor: R$ <%= totalS %> </li>
+                        </div>
+                                              
+                         
+                         <li>Identificador do pagamento: <%= order.payment %> </li>
+                        <% if(order.status === undefined || order.status == null){ %>
+                            <button class="btn btn-primary" style="height: 50px;align-items: center; width: 200px"><a style="color: white!important;" href="https://sandbox.mercadopago.com.br/checkout/v1/redirect?pref_id=<%= order.id_pagamento %>"> <span>Concluir pagamento</span> </a> </button>
+                            <% } %>
+
+                         
+                       
+                    </ul>
+            
+            </div>
+            
+        </div>
+    </div>
+        </section>
+        
+    </main>
+   <%- include('../partials/footer') %> 
+</body>
+</html>

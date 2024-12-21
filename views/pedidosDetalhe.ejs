@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("./partials/head")%>
+
+
+<body>
+    <%- include("./partials/header") %>
+    <main class="container-fluid " id="main-pedido">
+        <section class="container-fluid d-flex flex-column flex-sm-row">
+           
+            <div id="body" class="container"></div>
+
+
+            
+            <div id="pedido">
+            </div>
+      
+        </section>
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+<script>
+    
+
+  
+    var btn = document.createElement('button')
+    var product = JSON.parse(localStorage.getItem('produtos'))
+
+    
+
+    var comP = product.map(items=> {
+                        items.produto = items.produto
+                                         
+                        items.quantidade = parseInt(items.quantidade)
+                        items.valor = parseInt(items.valor)
+                        items.id = parseInt(items.id)
+                        items.total = parseInt(items.valor * items.quantidade)
+                        return items    
+    })
+
+
+
+
+
+    console.log(comP)
+    let table = document.createElement('table');
+        table.setAttribute('class', 'table table-striped table-light text-justify border')
+        let thead = document.createElement('thead');
+        let tbody = document.createElement('tbody');
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        // Adding the entire table to the body tag
+        document.getElementById('body').appendChild(table);
+
+        // Creating and adding data to first row of the table
+        let row_1 = document.createElement('tr');
+        let id = document.createElement('th');
+        id.innerHTML = "ID";
+        let produto = document.createElement('th');
+        produto.innerHTML = "Produto";
+        let quantidade = document.createElement('th');
+        quantidade.innerHTML = "Quantidade";
+        let preco = document.createElement('th');
+        preco.innerHTML = "Preço";
+        let total = document.createElement('th');
+        total.innerHTML = "Total";
+
+        row_1.appendChild(id);
+        row_1.appendChild(produto);
+        row_1.appendChild(quantidade);
+        row_1.appendChild(preco);
+        row_1.appendChild(total);
+        thead.appendChild(row_1);
+
+    comP.map(items=> {
+        
+        // Creating and adding data to second row of the table
+            
+            
+           
+                let row_2 = document.createElement('tr')
+                let td = document.createElement('td');
+                td.appendChild(document.createTextNode(items.id))             
+                td.setAttribute('name', 'id')
+                row_2.appendChild(td)
+                tbody.appendChild(row_2)
+                let td1 = document.createElement('td');
+                td1.appendChild(document.createTextNode(items.produto)) ;
+                td1.setAttribute('name', 'nome')
+                row_2.appendChild(td1)
+                tbody.appendChild(row_2)
+                let td2 = document.createElement('td');
+                td2.appendChild(document.createTextNode(items.quantidade)) ;
+                td2.setAttribute('name', 'quantidade')
+                row_2.appendChild(td2)
+                tbody.appendChild(row_2)
+
+                let td4 = document.createElement('td');
+                td4.appendChild(document.createTextNode(items.valor )) ;
+                td4.setAttribute('name', 'valor')
+                row_2.appendChild(td4)
+                tbody.appendChild(row_2)
+
+                let td3 = document.createElement('td');
+                td3.appendChild(document.createTextNode(items.valor * items.quantidade)) ;
+                td3.setAttribute('name', 'total')
+                row_2.appendChild(td3)
+                tbody.appendChild(row_2)
+
+            
+
+            
+          
+
+    })
+            let botaoS = document.createElement('button')
+            botaoS.setAttribute('class', 'btn btn-primary')
+            botaoS.setAttribute('type','submit')
+            let pedido = document.getElementById('pedido')
+            botaoS.appendChild(document.createTextNode('Enviar pedido'))
+            botaoS.setAttribute('onclick', 'enviar()')
+            pedido.appendChild(botaoS)
+
+
+            function enviar(){
+                let settings = {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(comP)
+                    
+                }
+                
+                    fetch('/pedidos/detalhes-pedido', settings)
+                    .then(function(response){
+                        console.log(response)
+                        const ok = response.ok
+                        console.log(ok)
+                        response.json()
+                        localStorage.clear()
+                        window.location.href = '/'
+                    })
+                    .then(function(info){
+                        console.log(info)
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                   
+}   
+</script>
+</html>

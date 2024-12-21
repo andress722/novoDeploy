@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("./partials/head")%>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+
+
+<body>
+    <%- include("./partials/header") %>
+        <section style="margin-top: 150px;height: 600px; background-color: #eee; " class="h-100 gradient-form">
+            <div class="lista-erros"></div>
+           <form style=" margin-bottom: 25px; border: solid 2px;" class="container d-flex flex-column" onsubmit="validaCadastro(event)"  action="" method="post" novalidate>
+            <label style="margin-top: 5px;" for="exampleFormControlInput1" for="email">Email</label>
+            <input style="margin-top: 5px;"type="email" placeholder="email" class="form-control" name="email" data-required>
+            <label  style="margin-top: 5px;"  for="exampleFormControlInput1" for="token">Token</label>
+            <input style="margin-top: 5px;"type="text" placeholder="token" class="form-control" name="token" data-required>
+            <label style="margin-top: 5px;"  for="exampleFormControlInput1" for="newPass">Nova senha</label>
+            <input style="margin-top: 5px;" type="password"  class="form-control" placeholder="Nova senha" name="senha" data-required>
+            <label style="margin-top: 5px;"  for="exampleFormControlInput1" for="confirmPassrod">Confirmar nova senha</label>
+            <input style="margin-top: 5px;"type="password" class="form-control" placeholder="Confirmar nova senha" name="Repeatsenha" data-required>            
+            <button style="width: 100px;margin-top: 15px;" class="btn btn-primary" type="submit">Enviar</button>
+           </form>
+        </section>
+
+    <%- include("./partials/footer") %>
+</body>
+
+
+<script src="/js/validacao.js"></script>
+<script src="/js/cadastro.js"></script>
+
+
+</html>

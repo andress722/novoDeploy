@@ -1,0 +1,44 @@
+<html lang="en">
+  <%- include("../partials/head")%>
+
+<body>
+    <%- include("../partials/header") %>
+    <main>        
+
+
+      <table class="table" >
+        <tbody>
+        <tr class="table-active">
+            <th>ID</th>
+            <th >nome</th>
+            <th >descricao</th>
+            <th >valor</th>
+            <th >acos</th>
+        </tr>
+
+      
+            <% categorias.produtos.forEach(function(produtos){ %> 
+            <tr>
+              <td><%= produtos.id  %> </td>
+              <td><%= produtos.nome  %>  </td>
+              <td><%= produtos.descricao  %></td>
+              <td><%= produtos.valor  %></td>
+              <td>
+                <a href="/admin/produtos/<%= produtos.id %>/edit">Editar</a>
+                
+              </td>
+            </tr>
+          </div>
+        <% })%>  
+  
+        </tbody>
+      </table> 
+          
+      </section>
+ 
+  <a href="/admin/produtos/criar">Novo serviço</a>
+</main>
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

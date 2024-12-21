@@ -1,0 +1,101 @@
+
+#empresa-nome{
+    color: white
+}
+
+
+
+#menu-dash-admin{
+    display: flex;
+    flex-direction: column;
+    ;
+}
+
+#menu-dash-admin ul{
+    text-decoration: none;  
+}
+
+#menu-dash-admin li{
+    text-decoration: none;
+    list-style: none;
+    color: rgb(53, 52, 52);
+}
+
+#menu-dash-admin a{
+    text-decoration: none;
+}
+
+#tabela{
+    display: flex;
+    background-color: #ebebebcc;
+}
+
+.containers-admin{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+#container-1-numero{
+    background-color: rgba(179, 175, 175, 0.795);
+    Width: 263px;
+    max-width: 515px;
+    Height: 213px;
+    border-radius: 15px;
+    padding: 0px;
+}
+
+
+
+#admin-main {
+    height: 350px;
+    border: solid;
+    border-color: black;
+    border-radius: 6px;
+}
+#admin-menu{
+    Width: 258px;
+    Height: 455px;
+    margin-left: 0;
+}
+
+.logado-login{
+    width: 3%;
+}
+
+.informacoes-1 ul{
+    margin-top: 46px;
+}
+
+
+.informacoes-2 ul{
+    margin-top: 46px;
+}
+
+.informacoes-1 li{
+    list-style: none;
+    color: #FFFFFF;
+    
+    
+}
+.informacoes-2 li{
+    list-style: none;
+    color: #FFFFFF;
+}
+
+footer{
+    background-color: black;
+    margin-top: 16vh;
+}
+
+#submenu-admin{
+    background-color: #8f8c8cd0;
+    Height: 34px;
+    margin-left: -226px;
+    width: 1350px;
+}
+#lista-submenu{
+    display: flex;
+    justify-content: space-between;
+    background-color: #8f8c8cd0;
+}

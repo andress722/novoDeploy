@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("./partials/head")%>
+
+<body>
+    <%- include("./partials/header") %>
+    <main>
+        <section class="contato">
+            <div class="container">
+                <h1>Cadastro de Usuario</h1>
+
+                <div class="align-row">
+                    <div class="lista-erros"></div>
+                    <form method="POST" action="/superadmin/cadastro"    novalidate>
+
+                        <div class="form-group" id="estilo-form">
+                            
+                            <div id="logo">
+                                <img src="img/logo.png" alt="">
+                            </div>
+                
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Nome</label>
+                                <input type="text" class="form-control" name="nome" placeholder="Digite o seu nome" data-required>
+                                
+                                <label for="email">email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Digite seu email" data-required>
+
+             
+
+                            </div>
+                
+                           
+            
+                            <div class="form-group">
+                                <label for="senha">Senha</label>
+                                <input type="password" name="senha" class="form-control" placeholder="Senha"data-required >
+                    
+                                <label for="repeatPassword">Repita a senha</label>
+                                <input type="password" name="repeatPassword" class="form-control" placeholder="Repita a senha" data-required>
+
+                                
+                            </div>
+                        
+                            
+                            <hr>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label"  for="exampleCheck1">Veja a senha</label>
+                            </div>
+                            <button type="submit" id="botao-usuario" class="btn btn-primary">ENVIAR</button>
+                        </form>
+                            
+                        </main>
+                      
+            </div>
+        </section>
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+
+
+
+</html>

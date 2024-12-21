@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/head")%>
+
+<body>
+    <%- include("../partials/header") %>
+        <section class="contato">
+            <div class="container">
+                <h1>Editar produto <%= produto.nome %> </h1>
+
+                <div class="align-row">
+                    <form method="POST">
+
+
+                        <label for="">Selecione uma categoria</label>
+                        <select name="categoria_id" id="categoria_id"  > 
+                            <% categorias.forEach(categoria => { %> 
+                            <option value="<%= categoria.id %>" 
+                                <% if(categoria.id == produto.categoria_id){ %>
+                                 selected
+                                 <% } %> 
+                                 ><%= categoria.nome %></option>
+                                <% }) %> 
+                            </select>
+
+                          
+                          <input type="hidden" id="usuario_id" name="usuario_id" value="<%= usuario.id %>" readonly=“true”>
+                          
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" value="<%= produto.nome %>">
+
+                        <label for="descricao">descricao</label>
+                        <textarea name="descricao" id="descricao" required><%= produto.descricao %></textarea>
+
+                        <label for="valor">Valor</label>
+                        <input type="number" id="valor" name="valor" value="<%= produto.valor %>" >
+                        
+                        <hr>
+                        <button style="width: 100px;" type="submit" class="btn btn-primary">enviar</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </section>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

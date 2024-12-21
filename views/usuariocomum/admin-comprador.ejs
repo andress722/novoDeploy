@@ -1,0 +1,39 @@
+<html lang="en">
+    <%- include("../partials/head") %>
+    <link rel="stylesheet" href="/path/to/adminStyle.css">
+
+    <body>
+        <%- include("../partials/header") %>
+        <main id="admin-main" class="container-fluid bg-light">
+            <section class="admin-section container">
+                <!-- Sidebar -->
+                <div id="side">
+                    <h2>
+                        <span class="bi bi-person-circle"></span>
+                        <%= usuarioLogado.nome %>
+                    </h2>
+                    <ul>
+                        <li><a href="/cadastro/edit/<%= usuario %>">Editar meu perfil</a></li>
+                        <li><a href="/api/carrinho?page=0">Meus pedidos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Informações -->
+                <div class="info-container">
+                    <h2>Informações de cadastro</h2>
+                    <ul>
+                        <li>Nome: <%= administrador.nome %></li>
+                        <li>Email: <%= administrador.email %></li>
+                        <li>Cep: <%= administrador.cep %></li>
+                        <li>Endereço: <%= administrador.endereco %></li>
+                        <li>Número: <%= administrador.numero %></li>
+                        <li>Bairro: <%= administrador.bairro %></li>
+                        <li>Cidade: <%= administrador.cidade %></li>
+                        <li>Estado: <%= administrador.estado %></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        <%- include('../partials/footer') %>
+    </body>
+</html>

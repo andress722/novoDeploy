@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/head")%>
+
+<body>
+    <%- include("../partials/header") %>
+    <main style="margin-top: 140px; margin-bottom: 20px">
+        <section class="container-fluid d-flex flex-wrap align-middle" style="align-items: center;">
+            <div class="container" >
+                <h1>Cadastro de Usuario</h1>
+
+                <div class="align-row align-middle" style="align-items: center;">
+                    <form method="POST" onsubmit="validaCadastro(event)" novalidate>
+
+                        <div class="form-group " style="align-items: center;" id="estilo-form">
+                            
+                            <div class="lista-erros">
+
+                            </div>
+                
+                            
+                
+                            </div>
+                            <div class="form-group d-flex flex-wrap w-100  " style="display: flex;">
+                                
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                    <label for="nome">Nome</label>
+                                    <input type="text" class="form-control" name="nome" placeholder="Digite o seu nome" data-required>
+                                    
+                                </div>
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                    <label for="numero">Celular</label>
+                                <input type="number" name="celular" class="form-control" placeholder="Digite seu numero" data-required>
+                                    
+                                </div>
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                    <label for="CPF">Cpf</label>
+                                    <input type="number" name="cpf" class="form-control" placeholder="Digite seu CPF" data-required>
+                                    
+                                </div>
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" class="form-control" placeholder="Digite seu email" data-required>
+                                    
+                                </div>
+
+                              
+
+                                
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                
+                                    <label for="cep">CEP</label>
+                                    <input type="text" id="cep" name="cep" class="form-control" placeholder="Cep" data-required>
+                                </div>                 
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                
+                                    <label for="endereco">Endereço</label>
+                                    <input type="text" id="endereco" name="endereco" class="form-control" placeholder="Endereço" data-required>
+                                </div>                            
+                                
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                    <label for="numero">Número</label>
+                                    <input type="text" id="numero" class="form-control" name="numero" placeholder="Numero" data-required>
+                                
+                                </div>
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                
+                                    <label for="bairro">Bairro</label>
+                                    <input type="text" id="bairro" class="form-control" name="bairro" placeholder="Bairro" data-required>
+                                </div>
+                                                            
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                    <label for="cidade">Cidade</label>
+                                    <input type="text" id="cidade" class="form-control" name="cidade" placeholder="Cidade" data-required>
+                                
+                                </div>
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                    <label for="estado">Estado</label>
+                                    <input type="text" id="estado" class="form-control" name="estado" placeholder="Estado" data-required>
+                                
+                                </div>
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                
+                                    <label for="senha">Senha</label>
+                                     <input type="password" name="senha" class="form-control" placeholder="Senha" >
+                                </div>
+                                <div class="card d-flex flex-column " style="margin-right: 50px; width: 300px;    height: 89px;">
+                                
+                                    <label for="repeatPassword">Repita a senha</label>
+                                    <input type="password" name="repeatPassword" class="form-control" placeholder="Repita a senha">
+                                </div>
+                                <button type="submit" id="botao-usuario" class="btn btn-primary">Enviar</button>
+                            <hr>
+                            
+                        </main>
+                        
+                        </form>
+                    </div>
+            </div>
+        </section>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+
+<script src="/js/validacao.js"></script>
+<script src="/js/cadastro.js"></script>
+<script src="/js/apiCep.js"></script>
+
+</html>

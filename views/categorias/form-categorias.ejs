@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/head")%>
+
+
+<body>
+    <%- include("../partials/header") %>
+    <main>    
+    <section class="contato">
+            <div class="container">
+                <h1>Cadastro de categoria</h1>
+
+                <div class="align-row">
+                    <form method="POST" enctype="multipart/form-data">
+                        <label for="imagem">Icone</label>
+                        <input type="file" name="imagemCategoria">
+
+                        
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome">
+
+                        
+                    
+                    <hr>
+                    <button style="width: 100px;" type="submit" class="btn btn-primary">enviar</button>
+                </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

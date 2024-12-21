@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include("./partials/head")%>
+
+<body>
+    <%- include("./partials/header") %>
+    <main>        
+
+
+      <table class="table" >
+        <tbody>
+        <tr class="table-active">
+            <th>categoria</th>
+            <th>ID</th>
+            <th >nome</th>
+            <th >descricao</th>
+            <th >valor</th>
+            <th >acos</th>
+        </tr>
+        
+            <% favoritos.forEach(function (favorito){ %>
+            <tr>
+              <td><%= favorito.categoria_id %> </td>
+              <td><%= favorito.id  %> </td>
+              <td><%= favorito.nome  %>  </td>
+              <td><%= favorito.descricao  %></td>
+              <td><%= favorito.valor  %></td>
+              <td>
+                <a href="/admin/produtos/<%= favorito.id %>/edit">Editar</a>
+                <a href="/admin/favoritos/<%= favorito.id %>/remover">Remover</a>
+
+                
+              </td>
+            </tr>
+          </div>
+        <%
+            }) %>
+        </tbody>
+      </table> 
+          
+      </section>
+ 
+  <a href="/admin/produtos">Voltar para lista de produtos</a>
+</main>
+    <%- include("./partials/footer") %>
+</body>
+
+</html>

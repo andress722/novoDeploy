@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head")%>
+
+  <title>Carrinho</title>  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+  <script type="text/javascript" src="/js/index.js" defer></script>
+
+
+    
+
+<body >
+  <%- include("./partials/header")%>
+  <main id="main" style="
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;" >
+
+      <div class="p-0" style="margin-left: 7px;">
+        <div id="lista-erro"></div>
+        <h1 style="font-size: 50px;">Carrinho</h1>
+        <div style="margin-top: 30px;" class=" p-0">
+
+          <div class="p-0" id="itens"> 
+            <ul class="p-0" id="lista"></ul>
+            
+          </div>
+          <button style="margin-top: 10px" class="btn btn-primary" type="button" onclick=" localStorage.clear(); location.reload();"> Limpar carrinho </button>
+        </div>
+        
+      
+      </div>
+      <div style=" margin-left: 7px;width: 234px;" class="border p-0">
+        
+        <div  >
+          <ul id="resumo-pedido">
+              
+          </ul>
+
+          <h3>Valor do pedido</h3>
+          
+
+            <div id="total"></div>
+         
+          
+         
+        </div>
+        
+      </div>
+
+
+    </div>
+   
+    
+    
+</main>
+
+
+  <%- include("./partials/footer")%>
+  
+</body>
+</html>
+<script>
+       
+        function errorValidate(e){  
+          let login = document.getElementById('login').innerText
+          let checkout = document.getElementById('checkout')
+          let main = document.getElementById('main')
+          let btnConfirm = document.getElementById('btn-confirm')
+          if(login != 'Login'){
+            console.log('diferente')
+            
+            checkout.setAttribute('style', 'display: block')
+            main.setAttribute('style', 'display:none')
+            btnConfirm.setAttribute('style', 'display:block')
+
+
+            
+
+          }else{
+            e.preventDefault()
+            console.log('faça a login')
+            
+            window.location.href = '/login'
+          }
+        }
+        let erro = document.getElementById('lista-erro')
+
+
+        var product = JSON.parse(localStorage.getItem("produtos"))
+        var ul = document.createElement('ul')
+        ul.setAttribute('class', 'container')
+        ul.setAttribute('class', 'lista-produtos')
+        
+           
+            
+                           
+
+                        
+        var comP = product.map((items)=> {
+         
+
+                          items.produto = items.produto
+                          items.quantidade = parseInt(items.quantidade)
+                          items.valor = parseInt(items.valor)
+                          items.id = parseInt(items.id)
+                          
+                          return items
+        })
+
+        const geraStringAleatoria =  (tamanho)=> {
+            var stringAleatoria = '';
+            var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const charactersLength = caracteres.length;
+            for (var i = 0; i < tamanho; i++) {
+                stringAleatoria += caracteres.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return stringAleatoria;
+            
+        }
+         const cart =  async ()=> {
+
+         
+            const pedido = await fetch('/api/carrinho')
+            const retorno = await pedido.json()
+            var numeroPAleatorio = await geraStringAleatoria(20)  
+              let proc = await retorno.pedidos.map(e=>e)
+              let list = []
+              var number = ''
+
+            if(retorno == null || []){
+              number = numeroPAleatorio
+            }else{
+
+              for(let i = 0; i<proc.length; i++){
+                if(proc[i].numero_pedido != null && proc[i].numero_pedido != ''){
+                  list.push(proc[i].numero_pedido)
+                }
+              }
+              if(list){
+                for(let e = 0; e<list.length; e++){
+                if(list.indexOf(numeroPAleatorio) !== -1){
+                  console.log('encontrou')
+                }else{
+                  number = numeroPAleatorio
+                  
+                }
+              }
+              
+              }
+             
+            }
+            return  number
+            
+            
+          }
+        
+
+        function deletar(id){
+          alert('deletar '+id)
+          for(let i=0; i<comP.length; i++ ){
+            if(comP[i].id === id){
+              comP.splice(i,1)
+            }
+          }
+        }
+               
+        comP.map((e)=>{
+      
+      
+          var li = document.createElement('li')
+          var btn = document.createElement('button')
+          btn.setAttribute('type', 'button')
+          btn.setAttribute('class', 'btn btn-dark ')
+          btn.setAttribute('id', 'mais')
+                    
+          btn.onclick = function add(){
+              let checarSeExiste = comP.filter(item => (item.produto === e.produto)).length > 0; // retorna true ou false
+                if(checarSeExiste){
+                  comP.map(items => {                    
+                        if (items.produto === e.produto){
+                          
+                          items.produto = e.produto
+                          items.quantidade = parseInt(e.quantidade)
+                          items.valor = parseInt(e.valor)
+                          items.id = parseInt(e.id)
+                          items.quantidade += 1; // soma o valor existente mais a quantidade repassada na função
+                          
+                          return items;
+                        }
+                   
+                }
+                );
+                localStorage.setItem('produtos',JSON.stringify(comP))
+                document.location.reload(true)
+          }
+        }
+          btn.appendChild(document.createTextNode('+'))
+          li.appendChild(btn)
+          var div = document.createElement('div')
+          var span = document.createElement('span')
+          if(e.quantidade < 10){
+            var qtd = document.createTextNode(' ' + 0 + e.quantidade + 'x ')
+          }else{
+            var qtd = document.createTextNode(' ' + e.quantidade + 'x ')
+          }
+          
+          div.appendChild(span)
+
+         
+            
+            span.appendChild(qtd) 
+          
+            span.appendChild(qtd) 
+          
+          span.appendChild(qtd)
+          li.appendChild(div)
+          div.setAttribute('class','valor')
+
+          var btn = document.createElement('button')
+          btn.setAttribute('type', 'button')
+          btn.setAttribute('class', 'btn btn-dark')
+          btn.setAttribute('id', 'menos')
+          btn.setAttribute('onclick', "deletar("+ e.id+")")
+
+
+          btn.onclick = function remove(){
+              let checarSeExiste = comP.filter(item => (item.produto === e.produto)).length > 0; // retorna true ou false
+                if(checarSeExiste){
+                  comP.map(items => {
+                                       
+                        if (items.produto === e.produto){
+                                                    
+                              items.produto = e.produto
+                              items.quantidade = parseInt(e.quantidade)
+                              items.valor = parseInt(e.valor)
+                              items.id = parseInt(e.id)
+                              items.quantidade -= 1; // subtri o valor existente mais a quantidade repassada na função
+                              if(items.quantidade === 0){
+
+                                deletar(e.id)
+                                    comP.filter((val) => {
+                                        return comP === val;
+                                      });
+                                      console.log('removeu '+e.produto)    
+                                    }
+
+                              return items;
+                                                    
+                        }
+                       
+                }
+                );
+                localStorage.setItem('produtos',JSON.stringify(comP))
+                document.location.reload(true)
+          }
+        }
+          btn.appendChild(document.createTextNode('-'))
+          li.setAttribute('class', 'lista-carrinho')
+          li.appendChild(btn)   
+          var nome = document.createTextNode(e.produto + ' ')
+          li.appendChild(nome)
+          var valor = document.createTextNode('R$ ' + e.valor + ' ')
+          li.appendChild(valor)
+          ul.setAttribute('class', 'p-0')
+          ul.appendChild(li)       
+      
+          var element = document.getElementById('lista')
+          element.appendChild(ul) 
+        })
+
+
+   // calcula o total dos recheios
+   function total(){
+
+    
+    let total = JSON.parse(localStorage.getItem('produtos'))
+    let totalM = total.map(items=> {
+                          items.produto = items.produto
+                          items.quantidade = parseInt(items.quantidade)
+                          items.valor = parseInt(items.valor)
+                          items.id = parseInt(items.id)
+                          return items
+        })
+
+
+
+    let tot = []
+    if(totalM != null){
+      let somaT = totalM.map(e => {
+         e.quantidade = parseInt(e.quantidade)
+        e.valor = e.valor = parseInt(e.valor)
+ 
+        let totalMulti = e.valor * e.quantidade
+
+        tot.push(totalMulti)
+        
+        
+      })
+      console.log(tot)
+    
+      
+      
+      
+    }
+    
+    return tot
+   }  
+   
+   function totR (){
+
+       
+      let tot = total()
+      if(tot != 0){ 
+          let totReduce = tot.reduce((e,t)=> tot = e+t)
+          
+          let valorT = document.getElementById('total')
+          let h3 = document.createElement('h3')
+    
+        
+        let btnP = document.createElement('button')
+         btnP.setAttribute('onclick', 'errorValidate(event)')
+          btnP.setAttribute('class', 'btn btn-primary')
+        btnP.appendChild(document.createTextNode('Fazer pedido'))
+        btnP.setAttribute('type','submit')
+        valorT.appendChild(h3)
+        valorT.appendChild(btnP)
+       
+        h3.appendChild(document.createTextNode(`R$ ${totReduce}`))
+        } else{
+         
+         let tot2 = 0
+         let valorT = document.getElementById('total')
+         let btnP = document.createElement('button')
+         let h3 = document.createElement('h3')
+         btnP.appendChild(document.createTextNode('Fazer pedido'))
+         btnP.setAttribute('onclick', 'errorOrder()')
+         btnP.setAttribute('class', 'btn btn-primary')
+         h3.appendChild(document.createTextNode(`R$ ${tot2}`))
+         valorT.appendChild(btnP)
+       }
+   }
+
+   window.addEventListener('load', totR)
+   function errorOrder(){
+          alert('Carrinho vazio')
+    } 
+  
+const nPedido = geraStringAleatoria(20)
+let order = new Object()
+order.produto = []
+order.quantidade = []
+order.id = []
+order.valor = []
+order.total = []
+order.pedidos = nPedido
+
+   const pedido = comP.map((items)=> {
+
+      
+
+        let label = document.createElement('label')
+        label.appendChild(document.createTextNode('Quantidade'))
+        let input = document.createElement('input')
+        input.setAttribute('value', `${items.quantidade}`)
+        input.setAttribute('id', 'quantity')
+        input.setAttribute('type', 'number')
+        input.setAttribute('class', 'form-control')
+        let proDetailP = document.createElement('div')
+        proDetailP.setAttribute('class', 'col-md-3 product-detail"')  
+        proDetailP.appendChild(label)
+      proDetailP.appendChild(input)
+        let p = document.createElement('p')
+        p.appendChild(document.createTextNode('Descrição: '))
+        let span = document.createElement('span')
+        span.setAttribute('id', 'product-description')
+        span.appendChild(document.createTextNode(items.produto))
+        let span1 = document.createElement('span')
+        let p1 = document.createElement('p')
+        p1.appendChild(document.createTextNode('R$ '))
+        span1.appendChild(document.createTextNode( + items.valor))
+        span1.setAttribute('id', 'unit-price')
+        p.appendChild(span)
+        p1.appendChild(span1)
+        p.appendChild(p1)
+
+
+        let proInfo = document.createElement('div')
+        proInfo.setAttribute('class', 'product-info')
+        proInfo.appendChild(p)
+        let proDetail = document.createElement('div')
+        proDetail.setAttribute('class', 'col-md-4 product-detail')
+        let h5 = document.createElement('h5')
+        proDetail.appendChild(h5)
+        proDetail.appendChild(proInfo)
+        proDetail.appendChild(proDetailP)
+      
+        let divCol = document.createElement('div')
+        divCol.setAttribute('class', 'col-md-3')
+        let img = document.createElement('img')
+        img.setAttribute('class', 'img-fluid mx-auto d-block image')
+        img.setAttribute('src', '/imagens/logo.png' )
+        divCol.appendChild(img)
+        let div = document.createElement('div')
+        div.setAttribute('class', 'row justify-content-md-center')
+        div.appendChild(divCol)
+       div.appendChild(proDetail)
+        
+        
+        let detail = document.createElement('div')
+        detail.appendChild(div)
+        detail.setAttribute('class', 'product-details')
+        let infoDiv = document.createElement('div')
+        infoDiv.setAttribute('class', 'info')
+        infoDiv.appendChild(detail)
+        let productDiv = document.createElement('div')
+        productDiv.setAttribute('class', 'product')
+        productDiv.appendChild(infoDiv)
+        let itemDiv = document.createElement('div')
+        itemDiv.setAttribute('class', 'items')
+        itemDiv.appendChild(productDiv)
+        
+        let containerItems = document.createElement('div')
+        containerItems.setAttribute('id', 'container-items')
+                          containerItems.appendChild(itemDiv)
+        containerItems.setAttribute('class', 'col-md-12 col-lg-8')
+        let row = document.createElement('row')
+        
+        row.appendChild(containerItems)
+        let content = document.getElementById('content')
+        content.appendChild(row)
+        
+      //summary-pay
+  
+
+      let spanQtd = document.createElement('span')
+      spanQtd.setAttribute('id', 'summary-quantity')
+      spanQtd.appendChild(document.createTextNode(items.quantidade))
+    let pSumm = document.createElement('p')
+    pSumm.setAttribute('class', 'item-name')
+    pSumm.appendChild(document.createTextNode(items.produto + ' x '))
+    pSumm.appendChild(spanQtd)
+
+    let spanP = document.createElement('span')
+    spanP.setAttribute('class', 'price')
+    spanP.setAttribute('id', 'summary-price')
+    spanP.appendChild(document.createTextNode('R$ '+ items.valor*items.quantidade))
+      let divItem = document.createElement('div')
+      divItem.setAttribute('class', 'item')
+      divItem.setAttribute('id', 'sumItem')
+      divItem.appendChild(spanP)
+      divItem.appendChild(pSumm)
+     
+
+      let divPro = document.createElement('div')
+      divPro.setAttribute('class', 'products')
+      divPro.setAttribute('id', 'summaryCon')
+      divPro.appendChild(divItem)
+      let formP = document.getElementById('for-pay')
+       formP.setAttribute('class', 'form-payment')
+       formP.appendChild(divPro)
+        
+              
+        
+        items.produto =  items.produto
+         items.quantidade =  parseInt(items.quantidade)
+         items.valor =  parseInt(items.valor)
+         items.id =  parseInt(items.id)
+         items.pedidos =  nPedido
+            order.id.push(items.id)
+            order.produto.push(items.produto)
+            order.quantidade.push(items.quantidade)
+            order.valor.push(items.valor)
+            order.total.push(items.quantidade * items.valor)
+
+         return  items
+})
+console.log(order)
+        let tt = total()
+
+        let sub = document.getElementById('cart-total').innerHTML = 'R$ ' + tt
+
+
+  //summary
+        let totalS = document.createElement('div')
+        totalS.setAttribute('class', 'total')
+        let sumI = document.getElementById('for-pay')
+        let spanTotal = document.createElement('span')
+       spanTotal.setAttribute('id', 'summary-total')
+       spanTotal.setAttribute('class', 'price')
+       spanTotal.appendChild(document.createTextNode('Total ' + 'R$ ' + tt))
+        totalS.appendChild(spanTotal)
+        sumI.appendChild(totalS)
+        let summCon = document.getElementById('summaryCon')
+        let payDe = document.createElement('div')
+        payDe.setAttribute('class', "payment-details")
+
+        let svg = document.createElement('svg')
+        svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+        svg.setAttribute('width', '12')
+        svg.setAttribute('height','12')
+        svg.setAttribute('viewBox','0 0 10 10')
+        svg.setAttribute('class','chevron-left')
+
+        let path = document.createElement('path')
+        path.setAttribute('fill','009EE3')
+        path.setAttribute('fill-rule','nonzero')
+        path.setAttribute('id','chevron_left')
+        path.setAttribute('d','M7.05 1.4L6.2.552 1.756 4.997l4.449 4.448.849-.848-3.6-3.6z')
+        svg.appendChild(path)
+        let a = document.createElement('a')
+        a.setAttribute('id', 'go-back')
+        a.appendChild(svg)
+        a.appendChild(document.createTextNode('Go back to Shopping Cart'))
+        let divB = document.createElement('div')
+        divB.setAttribute('id', 'button-checkout')
+        let divForm = document.createElement('div')
+        divForm.setAttribute('class', 'form-group col-sm-12')
+        let br = document.createElement('br')
+        divForm.appendChild(br)
+        divForm.appendChild(divB)
+        divForm.appendChild(br)
+        payDe.appendChild(divForm)
+        payDe.appendChild(a)
+        sumI.appendChild(payDe)
+
+    async function enviar(){
+                let settings = {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(order)
+                    
+                }
+                
+                   await fetch('/pedidos/detalhes-pedido', settings)
+                                  
+                        const ok = response.ok
+                        console.log(ok)
+                        response.json()
+                        
+                   
+}  
+   window.addEventListener('load', total)
+
+
+
+
+</script>
+
+<script src="/js/carrinho.js"></script>

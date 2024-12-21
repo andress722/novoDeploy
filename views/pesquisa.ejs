@@ -1,0 +1,139 @@
+  <%- include("./partials/head")%>
+<body >
+  <%- include("./partials/header")%>
+
+
+    
+        <h2>Voce pesquisou...</h2>
+  <main class="bg-light">
+            
+              <section style="margin-top: 5px">
+                <section class="produtos bg-light">
+              
+                  <div id="row" class="row">
+                    <% produtos.forEach(function(element){ %>
+                      <div id="itens-products" class="col-md-4 mt-2">
+                  
+                  
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="card-img-actions">
+                  
+                              <img id="img-card" src="/uploads/<%= element.imagem %> " class="card-img img-fluid" width="96" height="350"
+                                alt="">
+                  
+                            </div>
+                          </div>
+                  
+                          <div class="card-body bg-light text-center">
+                            <div class="mb-2">
+                              <h6 class="font-weight-semibold mb-2">
+                                <a href="/produtos/<%= element.id %> " class="text-default mb-2" data-abc="true">
+                                  <%= element.nome %>
+                                </a>
+                              </h6>
+                  
+                              <a href="/produtos/<%= element.id %>" class="text-muted" data-abc="true">Laptops & Notebooks</a>
+                            </div>
+                  
+                            <div>
+                              QTD: <input style="text-align: center;" class="bg-light" type="number" value="1" min="1" max="10" id="qtd">
+                  
+                              <h3 class="mb-0 font-weight-semibold">R$ <%= element.valor %>
+                              </h3>
+                            </div>
+                  
+                            <div>
+                              <i class="fa fa-star star"></i>
+                              <i class="fa fa-star star"></i>
+                              <i class="fa fa-star star"></i>
+                              <i class="fa fa-star star"></i>
+                            </div>
+                  
+                            <div class="text-muted mb-3">34 reviews</div>
+                  
+                            <button id="btn-add-cart" type="button"
+                              onclick="addProduto('<%= element.nome %>', document.getElementById('qtd').value, '<%= element.valor %>','<%= element.id %>')"
+                              class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+                  
+                  
+                          </div>
+                  
+                        </div>
+                  
+                  
+                  
+                  
+                      </div>
+                  
+                      <% }) %>
+                  
+                  
+                  </div>
+                  </div>
+            
+            
+                </section>
+            </main>
+
+    <%- include("./partials/footer")%>
+
+
+</body>
+
+<script>
+  /*function roteSearch(id){
+         window.location.href = `/produtos/${id}`     
+            }
+
+   async function pesquisar(){
+        
+
+       
+        const response = await fetch('/api/produtos')
+        let json = await response.json()
+        let produtoc = json.produtos.map(e=>e)
+        const nomes = localStorage.getItem('pesquisa')
+        let listagem = document.getElementById('listagem-produto')
+        
+        for(let i = 0; i<=produtoc.length; i++ ){
+            
+          let article = document.createElement('article')
+          article.setAttribute('id', 'article-index')
+      
+          let div = document.createElement('div')
+          div.setAttribute('class', 'd-flex')
+          div.setAttribute('id', 'div-pesquisa')
+          let p = document.createElement('p')
+          p.appendChild(document.createTextNode(produtoc[i].nome))
+          p.setAttribute('class', 'p-pesuisa')
+          div.appendChild(p)
+          let span = document.createElement('span')
+          span.appendChild(document.createTextNode('R$' + ' ' + produtoc[i].valor))
+          span.setAttribute('class', 'span-pesquisa')
+          div.appendChild(span)
+          let pre = document.createElement('pre')
+          pre.setAttribute('class', 'btn bi bi-cart btn-primary active p-0')
+          pre.appendChild(document.createTextNode(' Adicionar'))
+          pre.onclick = ()=> {
+            window.location.href = `/produtos/${produtoc[i].id}`
+          }
+          div.appendChild(pre)
+          let img = document.createElement('img')
+          img.setAttribute('src', `/uploads/${produtoc[i].imagem}`)
+          img.setAttribute('class', 'img-article')
+          img.setAttribute('href', `/produtos/${produtoc[i].id}`)
+          img.onclick = ()=> {
+            window.location.href = `/produtos/${produtoc[i].id}`
+          }
+          article.appendChild(img)
+          article.appendChild(div)
+          
+          listagem.appendChild(article)
+      }
+    }
+    window.addEventListener('load', pesquisar)
+    
+*/
+</script>
+</html>

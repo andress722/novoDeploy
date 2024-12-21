@@ -1,0 +1,35 @@
+li{
+    height: 60px;
+    /* width: 190px; */
+    display: flex;
+    align-items: center;
+}
+.valor{
+    width: 20px;
+}
+
+span{
+    padding: 0px;
+    margin: 5px;
+}
+#mais{
+    width: 10px;
+    height: 20px;
+    text-align: center;
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+}
+
+#menos{
+    width: 10px;
+    height: 20px;
+    text-align: center;
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+}

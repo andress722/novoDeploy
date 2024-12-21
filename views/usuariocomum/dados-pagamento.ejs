@@ -1,0 +1,35 @@
+<html lang="en">
+    <%- include("../partials/head")%>
+<body>
+    <%- include("../partials/header") %>
+    <main style="margin-top: 88px; height: 544px;" class="container-fluid bg-light" id="admin-main">
+       
+       
+        <section class="d-flex bg-light flex-column align-items-center " style="margin-top: 59px;">
+            <h1 style="font-size: 50px">Status do pagamento: <span id="status"><%= statusP %></span></h1>
+            <h2 style="font-size: 30px">Identificação do Pagamento: ID <span><%= payId %></span></h2>
+            <h2 style="font-size: 30px">Numero do pagamento: <span><%= pagamentoId %></span></h2>
+            
+           
+        </section>
+        
+    </main>
+    
+   <%-  include('../partials/footer') %> 
+</body>
+
+<script>
+function statusCheck(){
+    let status = document.getElementById('status').innerHTML
+    if(status == 'approved'){
+        let stats = document.getElementById('status')
+        let a = document.createElement('a')
+        a.setAttribute('class', 'fa fa-check text-success')
+        a.setAttribute('style', 'font-size: 50px')
+        stats.appendChild(a)
+    }
+    
+}
+    window.addEventListener('load', statusCheck)
+</script>
+</html>
