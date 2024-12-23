@@ -19,6 +19,10 @@ module.exports = (connection, DataTypes) => {
         },
         quantidade: {
             type: DataTypes.INTEGER(3)
+        }, valor_promocional: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            defaultValue: null,
         }
     }, {
         timestamps: true,

@@ -29,7 +29,7 @@ app.use(cors())
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(bodyParser.urlencoded({extended:true}))
-
+app.use(express.static('public'));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -44,6 +44,7 @@ app.use(function adicionaUserNoRender(req, res, next){
   res.locals.usuarioLogado = req.session.usuarioLogado
   next()
 })
+
 
 
 

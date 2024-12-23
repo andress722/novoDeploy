@@ -1,34 +1,98 @@
 <html lang="en">
-    <%- include("../partials/head")%>
+<%- include("../partials/head") %>
 <body>
     <%- include("../partials/header") %>
-    <main class="d-flex" style="margin-top: 88px;" >
-        <section class="container-fluid d-flex align-baseline" style="margin-top: 88px; align-items: baseline;" >
-            <div class="container-fluid d-flex flex-column" >
-                <div class="container" id="menu-dash-admin">
-                    <ul>
-                        <li><h2><%= usuarioLogado.nome  %> </h2></li>
-                        <li><strong>Perfil</strong> </li>
-                        <li><strong><a href="/superadmin/produtos">ir para produtos</strong></a></li>
-                        <li><strong><a href="/superadmin/categorias">ir para categorias</a></strong></li>
-                        <li><strong><a href="/superadmin/favoritos">ir para favoritos</a></strong></li>
+    <main class="d-flex" style="margin-top: 88px; background-color: #f8f9fa;">
+        <section class="container-fluid" style="margin-top: 20px;">
+            <div class="row">
+                <!-- Sidebar -->
+                <aside class="col-md-3 bg-dark text-white p-3 rounded">
+                    <h3 class="text-center mb-4">Admin Dashboard</h3>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-3">
+                            <h4 class="text-center"><%= usuarioLogado.nome %></h4>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link text-white"><i class="bi bi-person-circle"></i> Perfil</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="/superadmin/produtos" class="nav-link text-white"><i class="bi bi-box-seam"></i> Produtos</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="/superadmin/categorias" class="nav-link text-white"><i class="bi bi-tags"></i> Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/superadmin/promocoes" class="nav-link text-white"><i class="bi bi-star-fill"></i> Promocao</a>
+                        </li>
                     </ul>
-
-                </div>
+                </aside>
+                <!-- Main Content -->
+                <section class="col-md-9">
+                    <div class="row mb-4">
+                        <!-- Cards -->
+                        <div class="col-md-4">
+                            <div class="card text-white bg-primary mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vendas Totais</h5>
+                                    <p class="card-text">R$ 500</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Produtos Vendidos</h5>
+                                    <p class="card-text">25 Unidades</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-warning mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Novos Clientes</h5>
+                                    <p class="card-text">15 Clientes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tabela de Informações -->
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            Informações de Vendas
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Quantidade Vendida</th>
+                                        <th>Valor Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Notebook</td>
+                                        <td>10</td>
+                                        <td>R$ 10,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mouse</td>
+                                        <td>20</td>
+                                        <td>R$ 1,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Teclado</td>
+                                        <td>5</td>
+                                        <td>R$ 500</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <div class="container-fluid">
-
-            <div class="container-fluid" id="containers-admin">
-                        <ul>
-                            <li><strong> Informações de vendas</li></strong>
-                            <li>Vendidos</li>
-                            <li>Total R$500</li>    
-                        </ul>
-                   
-        </div>
         </section>
-        
     </main>
-   <%- include('../partials/footer') %> 
+    <%- include('../partials/footer') %>
 </body>
 </html>

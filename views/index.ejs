@@ -24,7 +24,7 @@
                 <li >
                   <div class="categoria-bar">
                     <img style="width: 55px; border: solid #eee; border-radius: 41px;" 
-                         src="/uploads/<%= categorias.imagem %> " alt="">
+                         src="/public/uploads/<%= categorias.imagem %> " alt="">
                     
                         <p><%= categorias.nome %> </p>
                   </div>
@@ -48,7 +48,7 @@
                 <div class="card-body">
                   <div class="card-img-actions">
         
-                    <img id="img-card" src="/uploads/<%= element.imagem %> " class="card-img img-fluid" width="96" height="350"
+                    <img id="img-card" src="../../uploads/<%= element.imagem %> " class="card-img img-fluid" width="96" height="350"
                       alt="">
         
                   </div>
@@ -172,7 +172,7 @@
           </div>
         </div>
       </section>
-
+      <img src="/uploads/ffef1f5349fbbb5fbedd767dcad34a92"class="card-img img-fluid" width="96" height="350" alt="" alt="">
   </main>
     <%- include("./partials/whatsapp")%>
   <%- include("./partials/footer")%>

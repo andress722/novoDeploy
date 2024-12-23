@@ -5,10 +5,10 @@ function validateRequired(form){
     const erros = []
     const inputs = form.querySelectorAll("[data-required]")
     console.log(inputs)
-    const nome = document.getElementsByName('nome')
-    if(nome.value.length < 4){
-        erros.push('O campo nome precisa de mais caracteres!')
-        nome.classList.add('has-error')
+    const nome = document.getElementsByName('nome')[0]; // Acessa o primeiro elemento da NodeList
+    if (nome && nome.value.length < 4) { // Verifica se o elemento existe antes de usá-lo
+        erros.push('O campo nome precisa de mais caracteres!');
+        nome.classList.add('has-error');
     }
 
     inputs.forEach(i => {

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head") %>
+<body>
+    <%- include("./partials/header") %>
+    <main class="container mt-5">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Erro de Validação</h4>
+            <p><%= mensagemErro || 'Ocorreu um erro ao processar sua solicitação.' %></p>
+            <hr>
+            <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+        </div>
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head") %>
+<body>
+    <%- include("../partials/header") %>
+    <main class="container mt-5">
+        <%- include('../partials/admin-navbar') %>
+
+        <h1>Produtos em Promoção</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor Original</th>
+                    <th>Valor Promocional</th>
+                    <th>Desconto (%)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% produtos.forEach(function(produto) { %>
+                <tr>
+                    <td><%= produto.categoria.nome %></td>
+                    <td><%= produto.id %></td>
+                    <td><%= produto.nome %></td>
+                    <td><%= produto.descricao %></td>
+                    <td>R$ <%= produto.valor %></td>
+                    <td>R$ <%= produto.valor_promocional %></td>
+                    <td>-<%= produto.dataValues.desconto.toFixed(2) %>%</td>
+                    <td>
+                        <a href="/produtos/<%= produto.id %>" class="btn btn-sm btn-info">Ver Produto</a>
+                        <a href="/superadmin/produtos/<%= produto.id %>/edit" class="btn btn-sm btn-warning">Editar</a>
+                        <form action="/superadmin/promocao/<%= produto.id %>/alterar" method="POST" style="display: inline;">
+                            <input type="number" name="desconto" placeholder="Novo Desconto (%)" 
+                                   class="form-control d-inline" 
+                                   style="width: 120px; display: inline;" min="1" max="100" required>
+                            <button type="submit" class="btn btn-sm btn-primary">Alterar Promoção</button>
+                        </form>
+                        <a href="/superadmin/promocao/<%= produto.id %>/remover" class="btn btn-sm btn-danger">Remover Promoção</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+</html>

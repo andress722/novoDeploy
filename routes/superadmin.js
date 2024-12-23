@@ -31,6 +31,11 @@ router.get('/categorias/:idCategoria/remove',verificaLoginAdm, empresa.categoria
 router.get('/json', empresa.jsonPedido)
 router.get('/promo', verificaLoginAdm, empresa.favorito)
 router.get('/favoritar/:idProduto', verificaLoginAdm, empresa.favoritar)
+router.get('/favoritos', verificaLoginAdm, empresa.favorito)
+router.get('/promocao/:idProduto', verificaLoginAdm, empresa.aplicarPromocao);
+router.get('/promocoes', verificaLoginAdm, empresa.produtosPromocao);
+router.post('/promocao/:idProduto/alterar', verificaLoginAdm, empresa.alterarPromocao);
+router.get('/promocao/:idProduto/remover', verificaLoginAdm, empresa.removerPromocao);
 
 
 module.exports = router

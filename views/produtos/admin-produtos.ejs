@@ -1,64 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <%- include("../partials/head")%>
-
+<%- include("../partials/head") %>
 <body>
     <%- include("../partials/header") %>
-    <main style="margin-top: 88px;">        
-      <table class="table" style="margin-top: 88px;">
-        <tbody>
-        <tr class="table-active">
-            <th>categoria</th>
-            <th>ID</th>
-            <th >nome</th>
-            <th >descricao</th>
-            <th >valor</th>
-            <th >acos</th>
-            <th>favorito</th>
-        </tr>
-          
-            <% calca.forEach(function (calcas){ %>
-          
-            <tr>
-              <td><%= calcas.categoria_id %> </td>
-              <td><%= calcas.id  %> </td>
-              <td><%= calcas.nome  %>  </td>
-              <td><%= calcas.descricao  %></td>
-              <td><%= calcas.valor  %></td>
-               
-              <td>
-                <a href="/superadmin/produtos/<%= calcas.id %>/edit">Editar</a>
-                <a href="/superadmin/produtos/<%= calcas.id %>/remover">Remover</a>
-                <a href="/superadmin/produtos/<%= calcas.id %>">Ver produto</a>
+    <main class="container mt-5">
+      <%- include('../partials/admin-navbar') %>
 
-               
-                <td><a onclick="showMessage()" class='favorito' href="/superadmin/favoritar/<%= calcas.id %>"style="text-decoration: none;">⭐</a></td>
-              
-              <% }) %> 
-              
-              </td>
-            </tr>
-          </div>
-      
-        </tbody>
-      </table> 
-        
-      </section>
- 
-  <a href="/superadmin/produtos/criar">Novo produto</a>
-  <a href="/superadmin/categorias/criar">Nova categoria</a>
-  <a href="/superadmin/promo">Ver itens em favoritos</a>
+        <h1>Lista de Produtos</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Promoção</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% produtos.forEach(function(produto) { %>
+                <tr>
+                    <td><%= produto.categoria.nome %></td>
+                    <td><%= produto.id %></td>
+                    <td><%= produto.nome %></td>
+                    <td><%= produto.descricao %></td>
+                    <td>R$ <%= produto.valor %></td>
+                    <td>
+                        <% if (produto.valor_promocional) { %>
+                            <span class="badge bg-success">
+                                -<%= produto.dataValues.desconto.toFixed(2) %>% OFF
+                            </span>
+                        <% } else { %>
+                            <span class="badge bg-secondary">Sem Promoção</span>
+                        <% } %>
+                    </td>
+                    <td>
+                        <a href="/produtos/<%= produto.id %>" class="btn btn-sm btn-info">Ver Produto</a>
+                        <a href="/superadmin/produtos/<%= produto.id %>/edit" class="btn btn-sm btn-warning">Editar</a>
+                        <button class="btn btn-sm btn-success" 
+                            onclick="applyPromotion(<%= produto.id %>, <%= produto.valor %>, <%= produto.dataValues.desconto || 0 %>)">
+                            Promoção
+                        </button>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </main>
 
-      
-  
-</main>
+    <!-- Modal para Promoção -->
+    <div id="promotionModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Aplicar Promoção</h5>
+                    <button type="button" class="btn-close" onclick="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="promotionForm">
+                        <input type="hidden" id="productId">
+                        <input type="hidden" id="originalPrice">
+                        <div class="mb-3">
+                            <label for="discount" class="form-label">Desconto (%)</label>
+                            <input type="number" id="discount" class="form-control" placeholder="Informe o desconto em %" min="0" max="100" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="finalPrice" class="form-label">Preço Final</label>
+                            <input type="text" id="finalPrice" class="form-control" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmPromotion()">Confirmar Promoção</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <%- include("../partials/footer") %>
 </body>
 <script>
-  function showMessage(){
-    alert('item a dicionado aos favoritos/promo')
-  }
+    function applyPromotion(productId, originalPrice, currentDiscount) {
+        if (currentDiscount > 0) {
+            const confirmation = confirm(`Este produto já possui uma promoção de ${currentDiscount.toFixed(2)}%. Deseja editar o valor do desconto?`);
+            if (!confirmation) return;
+        }
 
+        document.getElementById('productId').value = productId;
+        document.getElementById('originalPrice').value = originalPrice;
+        document.getElementById('discount').value = currentDiscount || '';
+        document.getElementById('finalPrice').value = currentDiscount
+            ? (originalPrice - (originalPrice * currentDiscount / 100)).toFixed(2)
+            : '';
+        document.getElementById('promotionModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('promotionModal').style.display = 'none';
+    }
+
+    document.getElementById('discount').addEventListener('input', function () {
+        const discount = parseFloat(this.value) || 0;
+        const originalPrice = parseFloat(document.getElementById('originalPrice').value);
+        const finalPrice = originalPrice - (originalPrice * discount / 100);
+        document.getElementById('finalPrice').value = `R$ ${finalPrice.toFixed(2)}`;
+    });
+
+    function confirmPromotion() {
+        const productId = document.getElementById('productId').value;
+        const discount = document.getElementById('discount').value;
+
+        if (!discount || discount <= 0 || discount > 100) {
+            alert('Por favor, insira um desconto válido.');
+            return;
+        }
+
+        window.location.href = `/superadmin/promocao/${productId}?discount=${discount}`;
+    }
 </script>
 </html>

@@ -18,7 +18,7 @@
                   <li >
                     <div class="categoria-bar">
                       <img style="width: 55px; border: solid #eee; border-radius: 41px;" 
-                           src="/uploads/<%= categorias.imagem %> " alt="">
+                           src="/public/categorias.imagem %> " alt="">
                       
                           <p><%= categorias.nome %> </p>
                     </div>
@@ -32,6 +32,7 @@
 <div class="container d-flex justify-content-center mt-50 mb-50">
 
 <div id="row" class="row">
+  
   <% produtos.forEach(function(element){ %>
     <div id="itens-products" class="col-md-4 mt-2">
 
@@ -40,7 +41,8 @@
         <div class="card-body">
           <div class="card-img-actions">
 
-            <img id="img-card" src="/uploads/<%= element.imagem %> " class="card-img img-fluid" width="96" height="350"
+            <img id="img-card" src="/uploads/<%= element.imagem %>" class="card-img img-fluid" width="96" height="350" alt="">
+
               alt="">
 
           </div>
