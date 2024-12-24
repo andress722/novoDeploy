@@ -12,8 +12,8 @@ const uploads = require('multer')({ dest: 'public/uploads/' })
 router.get('/admin', verificaLoginAdm, empresa.administrador)
 router.get('/loginempresa', empresa.loginEmpresa)
 router.post('/loginempresa', empresa.loginEmpresaPost)
-router.get('/enviocadastro', empresa.criarUsuarioGet)
-router.post('/enviocadastro', empresa.criando)
+router.get('/cadastro', empresa.cadastrarAdminGet);
+router.post('/cadastro', empresa.cadastrarAdminPost);
 router.get('/produtos',verificaLoginAdm, empresa.produtosAdmin)
 router.get('/produtos/criar', verificaLoginAdm,  empresa.criarProdutosAdmin)
 router.post('/produtos/criar', uploads.single('imagem'), verificaLoginAdm, empresa.criarProdutoAdminPost)

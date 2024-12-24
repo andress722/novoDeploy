@@ -61,23 +61,44 @@ const superadmin = {
 	},
 	
 
-	criarUsuarioGet: (req, res) => {
-		return res.render('cadastro');
+	cadastrarAdminGet: (req, res) => {
+		return res.render('produtos/cadastro-admin');
 	},
-	criando: async function (req, res) {
+	
+	cadastrarAdminPost: async function (req, res) {
 		try {
 			const { email, senha, nome } = req.body;
-			let senhaB = bcrypt.hashSync(senha, 4);
-			console.log(email);
-			const emailReq = await Usuario.findOne({ where: { email: email } });
-			if (!emailReq) {
-				await Usuario.create({ nome: nome, email: email, senha: senhaB });
-				console.log(senhaB);
-				return res.redirect('/superadmin/loginempresa');
+	
+			if (!email || !senha || !nome) {
+				console.error('Dados incompletos: email, senha ou nome ausentes.');
+				return res.render('form-servico-erro', {
+					mensagemErro: 'Todos os campos são obrigatórios.',
+				});
 			}
+	
+			// Criptografar senha
+			const senhaB = bcrypt.hashSync(senha, 4);
+			console.log('Senha criptografada:', senhaB);
+	
+			// Verificar se o email já está cadastrado
+			const emailReq = await Usuario.findOne({ where: { email: email } });
+			if (emailReq) {
+				console.error('Email já cadastrado:', email);
+				return res.render('form-servico-erro', {
+					mensagemErro: 'Email já cadastrado. Use outro email.',
+				});
+			}
+	
+			// Criar administrador
+			const novoAdmin = await Usuario.create({ nome: nome, email: email, senha: senhaB, tipo: 'Administrador' });
+			console.log('Administrador criado com sucesso:', novoAdmin);
+	
+			// Redirecionar após sucesso
+			return res.redirect('/superadmin/loginempresa');
 		} catch (error) {
+			console.error('Erro ao criar administrador:', error);
 			return res.render('form-servico-erro', {
-				mensagemErro: 'Erro no cadastro, tente novamente',
+				mensagemErro: 'Erro no cadastro, tente novamente.',
 			});
 		}
 	},
@@ -91,26 +112,27 @@ const superadmin = {
 	loginEmpresaPost: async function (req, res, next) {
 		try {
 			const { email, senha } = req.body;
-			console.log(email, senha)
+			console.log(email, senha);
 			const usuarioLogin = await Usuario.findOne({ where: { email } });
 	
-			if (!usuarioLogin) {
-				
+			if (!usuarioLogin || usuarioLogin.tipo !== 'Administrador') {
+				console.error('Usuário não autorizado ou não encontrado.');
 				return res.render('form-servico-erro', { mensagemErro: 'Usuário ou senha inválidos' });
 			}
 	
 			const valida = bcrypt.compareSync(senha, usuarioLogin.senha);
-			console.log(valida)
+			console.log(valida);
 			if (valida) {
-				console.log('chamou')
+				console.log('Login autorizado.');
 				req.session.estaLogado = true;
 				req.session.usuarioLogado = usuarioLogin;
 				return res.redirect('/superadmin/admin');
 			} else {
+				console.error('Senha inválida.');
 				return res.render('form-servico-erro', { mensagemErro: 'Usuário ou senha inválidos' });
 			}
 		} catch (error) {
-			console.error(error);
+			console.error('Erro ao tentar login:', error);
 			return res.render('form-servico-erro', { mensagemErro: 'Erro ao tentar login' });
 		}
 	},

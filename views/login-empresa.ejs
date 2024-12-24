@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login Page</title>
+    <title>Login Empresa</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -20,7 +20,7 @@
     <div class="d-flex justify-content-center h-100">
         <div class="card">
             <div class="card-header">
-                <h3>Sign In</h3>
+                <h3>Login Empresa</h3>
                 <div class="d-flex justify-content-end social_icon">
                     <span><i class="fab fa-facebook-square"></i></span>
                     <span><i class="fab fa-google-plus-square"></i></span>
@@ -28,28 +28,35 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="post" onsubmit="return ValidaLogin(event)" novalidate>
+                <!-- Formulário para login -->
+                <form method="POST" action="/superadmin/loginempresa" onsubmit="return ValidaLogin(event)" novalidate>
 					<div class="lista-erros"></div>
-					<div class="input-group form-group">
+					
+                    <!-- Campo Email -->
+                    <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" name="email" placeholder="Username" data-required>
+						<input type="email" class="form-control" name="email" placeholder="Digite seu email" data-required required>
 					</div>
-					<div class="input-group form-group">
+					
+                    <!-- Campo Senha -->
+                    <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" name="senha" class="form-control" placeholder="Password" data-required>
+						<input type="password" name="senha" class="form-control" placeholder="Digite sua senha" data-required required>
 					</div>
-					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn">
+					
+                    <!-- Botão de Envio -->
+                    <div class="form-group">
+						<input type="submit" value="Entrar" class="btn float-right login_btn">
 					</div>
 				</form>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">
-                    Don't have an account?<a href="/cadastro">Cadastre-se</a>
+                    Não tem uma conta? <a href="/superadmin/cadastro">Cadastre-se</a>
                 </div>
                 <div class="d-flex justify-content-center">
                     <a href="#">Esqueceu a senha?</a>
@@ -59,9 +66,6 @@
     </div>
 </div>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="/js/loginValida.js"></script>
 <script src="/js/validacao.js"></script>
 </body>

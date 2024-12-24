@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head")%>
+<body>
+    <%- include("../partials/header") %>
+    <main style="margin-top: 140px; margin-bottom: 20px;">
+        <section class="container-fluid d-flex flex-wrap align-middle" style="align-items: center;">
+            <div class="container">
+                <h1>Cadastro de Administrador</h1>
+
+                <div class="align-row align-middle" style="align-items: center;">
+                    <form method="POST" action="/superadmin/cadastro" novalidate>
+
+                        <div class="form-group d-flex flex-wrap w-100" style="display: flex;">
+
+                            <!-- Nome -->
+                            <div class="card d-flex flex-column" style="margin-right: 50px; width: 300px; height: 89px;">
+                                <label for="nome">Nome</label>
+                                <input type="text" name="nome" class="form-control" placeholder="Digite o nome do administrador" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="card d-flex flex-column" style="margin-right: 50px; width: 300px; height: 89px;">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Digite o email" required>
+                            </div>
+
+                            <!-- Senha -->
+                            <div class="card d-flex flex-column" style="margin-right: 50px; width: 300px; height: 89px;">
+                                <label for="senha">Senha</label>
+                                <input type="password" name="senha" class="form-control" placeholder="Digite a senha" required>
+                            </div>
+
+                            <!-- Repetir Senha -->
+                            <div class="card d-flex flex-column" style="margin-right: 50px; width: 300px; height: 89px;">
+                                <label for="repeatPassword">Repita a senha</label>
+                                <input type="password" name="repeatPassword" class="form-control" placeholder="Repita a senha" required>
+                            </div>
+                        </div>
+
+                        <!-- Botão de Enviar -->
+                        <button type="submit" id="botao-admin" class="btn btn-primary mt-3">Cadastrar Administrador</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+
+<script src="/js/validacao.js"></script>
+<script src="/js/cadastro.js"></script>
+</html>
